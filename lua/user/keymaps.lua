@@ -18,3 +18,5 @@ keymap("n", "<leader>qs", "ciw'<C-r>\"'<Esc>", opts) -- Surround word in single 
 keymap("n", "<leader>qd", 'ciw"<C-r>""<Esc>', opts) -- Surround word in double quotes
 keymap("v", "<leader>qs", "c'<C-r>\"'<Esc>", opts) -- Surround selection in single quotes
 keymap("v", '<leader>qd', 'c"<C-r>""<Esc>', opts) -- Surround selection in double quotes
+
+keymap("n", ";", "$a;<Esc>", opts) -- Append line with semi-colon
