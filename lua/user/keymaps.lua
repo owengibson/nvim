@@ -51,6 +51,7 @@ keymap('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
 keymap('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
 keymap('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
 
+keymap('n', '<a-c>', "<Cmd>BufferClose<CR>", opts)
 
 -- C++ compile and run
 vim.api.nvim_create_autocmd("FileType", {

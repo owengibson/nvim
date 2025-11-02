@@ -14,3 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 require("user.keymaps")
 require("lazy").setup("plugins")
 require("user.options")
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'cs' },
+    callback = function ()
+        vim.treesitter.start()
+    end
+})
