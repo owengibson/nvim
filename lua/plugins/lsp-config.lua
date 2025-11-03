@@ -12,7 +12,7 @@ return {
 		},
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls"},
+				ensure_installed = { "lua_ls" },
 			})
 		end,
 	},
@@ -20,9 +20,16 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            vim.lsp.config("*", {
-                capabilities = capabilities
-            })
+			vim.lsp.config("*", {
+				capabilities = capabilities,
+			})
+
+			vim.lsp.config("omnisharp", {
+				cmd = {
+					"dotnet",
+					vim.fn.stdpath("data") .. "\\mason\\packages\\omnisharp\\libexec\\OmniSharp.dll",
+				},
+			})
 
 			vim.lsp.enable("lua_ls")
 			vim.lsp.enable("omnisharp")
