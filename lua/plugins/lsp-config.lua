@@ -2,6 +2,14 @@ return {
 	{
 		"mason-org/mason.nvim",
 		opts = {},
+		config = function()
+			require("mason").setup({
+				registries = {
+					"github:mason-org/mason-registry",
+					"github:Crashdummyy/mason-registry",
+				},
+			})
+		end,
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
@@ -24,15 +32,7 @@ return {
 				capabilities = capabilities,
 			})
 
-			vim.lsp.config("omnisharp", {
-				cmd = {
-					"dotnet",
-					vim.fn.stdpath("data") .. "\\mason\\packages\\omnisharp\\libexec\\OmniSharp.dll",
-				},
-			})
-
 			vim.lsp.enable("lua_ls")
-			vim.lsp.enable("omnisharp")
 			vim.lsp.enable("pyright")
 			vim.lsp.enable("rust_analyzer")
 			vim.lsp.enable("clangd")
