@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.makeprg = "g++ -std=c++23 -Wall -Wextra % -o %:r" .. exe_ext
 
 		-- Compile only
-		vim.keymap.set("n", "<F5>", ":w<CR>:make<CR>:copen<CR>", { buffer = true, desc = "Compile C++" })
+		vim.keymap.set("n", "<F7>", ":w<CR>:make<CR>:copen<CR>", { buffer = true, desc = "Compile C++" })
 
 		-- Compile and run
 		vim.keymap.set("n", "<F6>", function()
