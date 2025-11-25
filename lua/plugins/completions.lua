@@ -1,7 +1,7 @@
 return {
-    {
-        'hrsh7th/cmp-nvim-lsp'
-    },
+	{
+		"hrsh7th/cmp-nvim-lsp",
+	},
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = {
@@ -13,11 +13,12 @@ return {
 		"hrsh7th/nvim-cmp",
 		config = function()
 			local cmp = require("cmp")
-            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			local luasnip = require("luasnip")
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			require("luasnip.loaders.from_vscode").lazy_load()
-            require("luasnip.loaders.from_lua").lazy_load({
-                paths = vim.fn.stdpath("config") .. "/lua/snippets"
-            })
+			require("luasnip.loaders.from_lua").lazy_load({
+				paths = vim.fn.stdpath("config") .. "/lua/snippets",
+			})
 
 			cmp.setup({
 				snippet = {
@@ -36,6 +37,27 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+                    -- Snippet navigation
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.expand_or_jumpable() then
+							luasnip.expand_or_jump()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif luasnip.jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
@@ -45,7 +67,7 @@ return {
 				}),
 			})
 
-            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 }
